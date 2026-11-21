@@ -97,7 +97,7 @@ Auf dem Smartphone kann die HTTPS-Seite über das Browser-Menü zum Startbildsch
 
 ## Einstellungen und Push auf dem iPhone
 
-Unter **Einstellungen** lassen sich Deutsch oder Englisch, Dark Mode und die angezeigten Dashboard-Bereiche wählen. Die Auswahl wird auf dem Pi in `data/preferences.json` gespeichert und nach erneutem Öffnen auch auf anderen Geräten geladen. Der Browser merkt sich die zuletzt verwendete Sprache für die Anmeldeseite, sofern lokaler Speicher verfügbar ist; nach der Anmeldung gilt die gespeicherte Server-Einstellung. Technische Fehlermeldungen des Servers und Push-Hinweise können weiterhin auf Deutsch erscheinen. Ausgeblendete Bereiche bleiben in Betrieb; Warnungen werden dadurch nicht abgeschaltet.
+Unter **Einstellungen** lassen sich Deutsch oder Englisch, Dark Mode und die angezeigten Dashboard-Bereiche wählen. Die Auswahl wird auf dem Pi in `data/preferences.json` gespeichert und nach erneutem Öffnen auch auf anderen Geräten geladen. Der Browser merkt sich die zuletzt verwendete Sprache für die Anmeldeseite, sofern lokaler Speicher verfügbar ist; nach der Anmeldung gilt die gespeicherte Server-Einstellung. Der Katzen-Schalter auf der Anmeldeseite ändert die Darstellung nur für die Anmeldung auf diesem Gerät und speichert sie im Browser. Nach der Anmeldung gilt wieder die Dashboard-Einstellung vom Pi. Technische Fehlermeldungen des Servers und Push-Hinweise können weiterhin auf Deutsch erscheinen. Ausgeblendete Bereiche bleiben in Betrieb; Warnungen werden dadurch nicht abgeschaltet.
 
 Für Push ist iOS 16.4 oder neuer, HTTPS und eine Internetverbindung erforderlich:
 
@@ -131,33 +131,35 @@ Der Wert muss der vom Tuya-Gerätemodell vorgegebenen JSON-Darstellung entsprech
 
 Die Tabelle enthält bisher untersuchte oder in der Gerätedefinition beschriebene Datenpunkte, nicht notwendigerweise alle Datenpunkte des Modells. Die Zuordnungen gelten nicht automatisch für andere Geräte oder Firmware-Versionen. **Unbekannte Datenpunkte nicht beschreiben; keine Meldung ersetzt eine Sicherheitsprüfung.**
 
-| DP | Bedeutung | Stand und Verwendung |
-| --- | --- | --- |
-| 4 | Auto Clean / Sensormodus | Durch Ein- und Ausschalten beobachtet; Anzeige ist lesend. |
-| 5 | Reinigungsverzögerung | Sekunden; 180 und 600 entsprechen den in Smart Life eingestellten drei und zehn Minuten. |
-| 101 | Verbleibende Deodorant-Tage | Erinnerungswert, kein gemessener Zustand. Direkte Schreibversuche auf 4 und 20 wurden nicht übernommen. |
-| 105 | Verbleibende Katzenstreu-Tage | Erinnerungswert, 0–30 Tage. Lokal nach Bestätigung setzbar; gemeldeten Wert anschließend prüfen. |
-| 109 | Fehlermeldung | Warnungen werden lokal aufgezeichnet; Meldungen können veraltet sein. Die Fehlerzuordnung beruht auf der Gerätedefinition, nicht auf unabhängiger Diagnose. |
-| 110 | Letzte Gerätemeldung | Kann veraltet sein und belegt weder Sicherheit noch die Abwesenheit einer Katze. |
-| 111 | Besuchsdauer und Gewicht | Vier Bytes: je zwei für Sekunden und interpretiertes Gewicht in Gramm. In fünf Ereignissen beobachtet; ein Gewicht mit Smart Life verglichen. Weitere unabhängige Vergleiche fehlen. |
-| 112 | Kitten-Modus | Durch Ein- und Ausschalten beobachtet; Anzeige ist lesend. |
-| 113 | Kinderriegel | Durch Ein- und Ausschalten beobachtet; Anzeige ist lesend. |
-| 114 | Nicht stören: Anzeigelicht | Einstellung beobachtet; die Uhrzeiten und der aktuell aktive Zeitplan sind nicht zugeordnet. |
-| 115 | Tägliche Luft-/Reinigungseinstellung | Laut Gerätedefinition; praktische Bedeutung und Skalierung noch zu prüfen. |
-| 117 | Luftvorhang nach Toilettennutzung | Laut Gerätevergleich zugeordnet; Aktivierungszeiten noch unbekannt. |
-| 119 | Nicht stören: Signalton | Einstellung beobachtet; die Uhrzeiten und der aktuell aktive Zeitplan sind nicht zugeordnet. |
-| 121 | Reinigungszeitplan | Als Ereignis beobachtet; Format nicht sicher entschlüsselt. Das Dashboard zeigt den Rohwert nur, wenn er im Status enthalten ist. |
-| 122 | Nicht stören: Reinigung deaktivieren | Einstellung beobachtet; die Uhrzeiten und der aktuell aktive Zeitplan sind nicht zugeordnet. |
-| 124 | Deodorant-Reset-Signal | Dashboard sendet nach Bestätigung einen Reset. Ein Smart-Life-Eintrag wurde beobachtet; eine Zählererhöhung von weniger als 30 Tagen ist nicht bestätigt. Gemeldeten Wert prüfen. |
-| 125 | Katzenstreu-Reset-Signal | Beim Reset beobachtet; das Dashboard sendet keinen Reset für Katzenstreu. |
-| 126 | Verbleibende Abfallbehälter-Tage | Erinnerungswert, 0–14 Tage. Lokal nach Bestätigung setzbar; gemeldeten Wert anschließend prüfen. |
-| 128 | Timer-Modus / regelmäßige Reinigung | Durch Ein- und Ausschalten beobachtet; Anzeige ist lesend. |
-| 130 | Toiletten-Reset-Signal | Beim Reset beobachtet; das Dashboard sendet keinen Reset für die Toilette. |
-| 131 | Letzte Besuchsdauer | Sekunden; bei zwei Berichten verglichen. |
-| 132 | Besuchsmeldung | Ein Wert von 1 wurde pro Besuch beobachtet; nicht als Gesamtzähler bestätigt. |
-| 133 | Lüfterstatus | Laut Gerätedefinition; praktische Zuordnung noch zu prüfen. |
-| 134 | Diagnose-Rohdaten | Änderungen nach einer Drehung beobachtet. Eine Bedeutung als Motorposition ist nicht bestätigt; kein Positions- oder Sicherheitsnachweis. |
-| 136 | Luftvorhang: tägliche Reinigung | Laut Gerätevergleich zugeordnet; Aktivierungszeiten noch unbekannt. |
+**Status:** ✅ Zuordnung beobachtet und im Dashboard nutzbar (gegebenenfalls nur lesend); ⚠️ teilweise zugeordnet oder Funktion noch nicht vollständig bestätigt; 🔍 Bedeutung oder Format noch zu prüfen. Ein Häkchen bestätigt weder eine Sicherheitsfunktion noch die Zuverlässigkeit jeder Gerätemeldung.
+
+| DP | Herausgefundene Funktion | Status | Stand und Verwendung |
+| --- | --- | --- | --- |
+| 4 | Auto Clean / Sensormodus | ✅ | Durch Ein- und Ausschalten beobachtet; Anzeige ist lesend. |
+| 5 | Reinigungsverzögerung | ✅ | Sekunden; 180 und 600 entsprechen den in Smart Life eingestellten drei und zehn Minuten. |
+| 101 | Verbleibende Deodorant-Tage | ✅ | Erinnerungswert, kein gemessener Zustand. Direkte Schreibversuche auf 4 und 20 wurden nicht übernommen. |
+| 105 | Verbleibende Katzenstreu-Tage | ✅ | Erinnerungswert, 0–30 Tage. Lokal nach Bestätigung setzbar; gemeldeten Wert anschließend prüfen. |
+| 109 | Fehlermeldung | ⚠️ | Warnungen werden lokal aufgezeichnet; Meldungen können veraltet sein. Fehlerzuordnung laut Gerätedefinition, nicht unabhängig diagnostiziert. |
+| 110 | Letzte Gerätemeldung | ✅ | Kann veraltet sein und belegt weder Sicherheit noch die Abwesenheit einer Katze. |
+| 111 | Besuchsdauer und Gewicht | ⚠️ | Vier Bytes: je zwei für Sekunden und interpretiertes Gewicht in Gramm. In fünf Ereignissen beobachtet; ein Gewicht mit Smart Life verglichen. Weitere unabhängige Vergleiche fehlen. |
+| 112 | Kitten-Modus | ✅ | Durch Ein- und Ausschalten beobachtet; Anzeige ist lesend. |
+| 113 | Kinderriegel | ✅ | Durch Ein- und Ausschalten beobachtet; Anzeige ist lesend. |
+| 114 | Nicht stören: Anzeigelicht | ⚠️ | Einstellung beobachtet; die Uhrzeiten und der aktuell aktive Zeitplan sind nicht zugeordnet. |
+| 115 | Tägliche Luft-/Reinigungseinstellung | 🔍 | Laut Gerätedefinition; praktische Bedeutung und Skalierung noch zu prüfen. |
+| 117 | Luftvorhang nach Toilettennutzung | ⚠️ | Laut Gerätevergleich zugeordnet; Aktivierungszeiten noch unbekannt. |
+| 119 | Nicht stören: Signalton | ⚠️ | Einstellung beobachtet; die Uhrzeiten und der aktuell aktive Zeitplan sind nicht zugeordnet. |
+| 121 | Reinigungszeitplan | 🔍 | Als Ereignis beobachtet; Format nicht sicher entschlüsselt. Das Dashboard zeigt den Rohwert nur, wenn er im Status enthalten ist. |
+| 122 | Nicht stören: Reinigung deaktivieren | ⚠️ | Einstellung beobachtet; die Uhrzeiten und der aktuell aktive Zeitplan sind nicht zugeordnet. |
+| 124 | Deodorant-Reset-Signal | ⚠️ | Dashboard sendet nach Bestätigung einen Reset. Ein Smart-Life-Eintrag wurde beobachtet; eine Zählererhöhung von weniger als 30 Tagen ist nicht bestätigt. Gemeldeten Wert prüfen. |
+| 125 | Katzenstreu-Reset-Signal | ⚠️ | Beim Reset beobachtet; das Dashboard sendet keinen Reset für Katzenstreu. |
+| 126 | Verbleibende Abfallbehälter-Tage | ✅ | Erinnerungswert, 0–14 Tage. Lokal nach Bestätigung setzbar; gemeldeten Wert anschließend prüfen. |
+| 128 | Timer-Modus / regelmäßige Reinigung | ✅ | Durch Ein- und Ausschalten beobachtet; Anzeige ist lesend. |
+| 130 | Toiletten-Reset-Signal | ⚠️ | Beim Reset beobachtet; das Dashboard sendet keinen Reset für die Toilette. |
+| 131 | Letzte Besuchsdauer | ✅ | Sekunden; bei zwei Berichten verglichen. |
+| 132 | Besuchsmeldung | 🔍 | Ein Wert von 1 wurde pro Besuch beobachtet; nicht als Gesamtzähler bestätigt. |
+| 133 | Lüfterstatus | 🔍 | Laut Gerätedefinition; praktische Zuordnung noch zu prüfen. |
+| 134 | Diagnose-Rohdaten | 🔍 | Änderungen nach einer Drehung beobachtet. Eine Bedeutung als Motorposition ist nicht bestätigt; kein Positions- oder Sicherheitsnachweis. |
+| 136 | Luftvorhang: tägliche Reinigung | ⚠️ | Laut Gerätevergleich zugeordnet; Aktivierungszeiten noch unbekannt. |
 
 Ein gemeldetes `true` bei DP 124, 125 oder 130 bestätigt weder Erfolg noch Zeitpunkt eines Resets; der Wert kann veraltet sein. Die Prozentanzeigen für DP 101, 105 und 126 berechnen sich aus den verbleibenden Tagen (Modell-Maximum 30, 30 bzw. 14 Tage), nicht aus einem gemessenen Füllstand. Ein erfolgreicher Sendevorgang für DP 105 oder 126 bestätigt die Übernahme nicht. Bei Fehler oder Zeitüberschreitung kann der Erfolg unklar sein; es gibt keinen automatischen erneuten Versuch. Diese Erinnerungswerte ersetzen weder Streuwechsel noch das Leeren des Behälters.
 
