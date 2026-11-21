@@ -7,6 +7,7 @@ const loginMessage = document.querySelector('#login-message');
 const loginRemember = document.querySelector('#login-remember');
 const passwordToggle = document.querySelector('#password-toggle');
 const loginThemeToggle = document.querySelector('#login-theme');
+const dashboardThemeToggle = document.querySelector('#dashboard-theme');
 let language = 'de';
 let loginTheme = null;
 const staticTranslations = {
@@ -141,6 +142,7 @@ function rememberLanguage() {
 function setTheme(theme) {
   document.body.dataset.theme = theme;
   loginThemeToggle.setAttribute('aria-pressed', String(theme === 'dark'));
+  dashboardThemeToggle.setAttribute('aria-pressed', String(theme === 'dark'));
 }
 const connection = document.querySelector('#connection');
 const deviceState = document.querySelector('#device-state');
@@ -220,6 +222,8 @@ function prepareHistory(items, recent, more, moreLabel, older) {
 const sectionNames = ['weight', 'supplies', 'activity', 'camera', 'warnings', 'actions', 'values', 'functions'];
 const settingsForm = document.querySelector('#settings-form');
 const settingsMessage = document.querySelector('#settings-message');
+const settingsSave = document.querySelector('#settings-save');
+const themeMessage = document.querySelector('#theme-message');
 const pushMessage = document.querySelector('#push-message');
 const pushEnable = document.querySelector('#push-enable');
 const pushDisable = document.querySelector('#push-disable');
@@ -227,19 +231,34 @@ const pushTest = document.querySelector('#push-test');
 let pushRegistration = null;
 let pushKey = null;
 let currentSubscription = null;
+let preferencesReady = false;
+let preferencesBusy = false;
+
+function updatePreferenceControls() {
+  settingsSave.disabled = dashboardThemeToggle.disabled = !preferencesReady || preferencesBusy;
+}
 
 async function loadPreferences() {
+  const generation = dashboardGeneration;
+  preferencesReady = false;
+  updatePreferenceControls();
   try {
     const response = await fetch('/api/preferences', { cache: 'no-store' });
     const settings = await response.json();
+    if (generation !== dashboardGeneration || appShell.hidden) return;
     if (!response.ok) throw new Error(settings.error || tr('Einstellungen konnten nicht geladen werden.', 'Settings could not be loaded.'));
     const previousLanguage = language;
     applyPreferences(settings);
-    document.querySelector('#settings-save').disabled = false;
+    preferencesReady = true;
+    updatePreferenceControls();
     settingsMessage.textContent = tr('Auf dem Server gespeichert.', 'Saved on the server.');
+    themeMessage.textContent = '';
     if (language !== previousLanguage && !appShell.hidden) loadDevice();
   } catch (error) {
-    settingsMessage.textContent = friendlyError(error, tr('Einstellungen konnten nicht geladen werden.', 'Settings could not be loaded.'));
+    if (generation !== dashboardGeneration || appShell.hidden) return;
+    const text = friendlyError(error, tr('Einstellungen konnten nicht geladen werden.', 'Settings could not be loaded.'));
+    settingsMessage.textContent = text;
+    themeMessage.textContent = text;
   }
 }
 
@@ -258,6 +277,10 @@ function applyPreferences(settings) {
 
 settingsForm.addEventListener('submit', async (event) => {
   event.preventDefault();
+  if (!preferencesReady || preferencesBusy) return;
+  const generation = dashboardGeneration;
+  preferencesBusy = true;
+  updatePreferenceControls();
   const settings = {
     theme: document.querySelector('#setting-dark').checked ? 'dark' : 'light',
     language: document.querySelector('#setting-language').value,
@@ -269,13 +292,50 @@ settingsForm.addEventListener('submit', async (event) => {
       method: 'POST', headers: { 'content-type': 'application/json' }, body: JSON.stringify(settings)
     });
     const result = await response.json();
+    if (generation !== dashboardGeneration || appShell.hidden) return;
     if (!response.ok) throw new Error(result.error || tr('Einstellungen konnten nicht gespeichert werden.', 'Settings could not be saved.'));
     applyPreferences(result);
     settingsMessage.textContent = tr('Gespeichert. Auf anderen Geräten nach erneutem Öffnen sichtbar.', 'Saved. Visible on other devices when reopened.');
+    themeMessage.textContent = '';
     refreshPushStatus();
     if (!appShell.hidden) loadDevice();
   } catch (error) {
+    if (generation !== dashboardGeneration || appShell.hidden) return;
     settingsMessage.textContent = friendlyError(error, tr('Einstellungen konnten nicht gespeichert werden.', 'Settings could not be saved.'));
+  } finally {
+    if (generation === dashboardGeneration) {
+      preferencesBusy = false;
+      updatePreferenceControls();
+    }
+  }
+});
+
+dashboardThemeToggle.addEventListener('click', async () => {
+  if (!preferencesReady || preferencesBusy) return;
+  const generation = dashboardGeneration;
+  const theme = document.body.dataset.theme === 'dark' ? 'light' : 'dark';
+  preferencesBusy = true;
+  updatePreferenceControls();
+  themeMessage.textContent = tr('Darstellung wird gespeichert…', 'Saving appearance…');
+  try {
+    const saved = await fetch('/api/preferences', {
+      method: 'PATCH', headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({ theme })
+    });
+    const result = await saved.json();
+    if (generation !== dashboardGeneration || appShell.hidden) return;
+    if (!saved.ok) throw new Error(result.error || tr('Darstellung konnte nicht gespeichert werden.', 'Appearance could not be saved.'));
+    setTheme(result.theme);
+    document.querySelector('#setting-dark').checked = result.theme === 'dark';
+    themeMessage.textContent = tr('Darstellung gespeichert.', 'Appearance saved.');
+  } catch (error) {
+    if (generation !== dashboardGeneration || appShell.hidden) return;
+    themeMessage.textContent = friendlyError(error, tr('Darstellung konnte nicht gespeichert werden.', 'Appearance could not be saved.'));
+  } finally {
+    if (generation === dashboardGeneration) {
+      preferencesBusy = false;
+      updatePreferenceControls();
+    }
   }
 });
 
@@ -628,6 +688,9 @@ function friendlyError(error, fallback) {
 
 function showLogin(messageText = '') {
   dashboardGeneration += 1;
+  preferencesReady = false;
+  preferencesBusy = false;
+  updatePreferenceControls();
   window.clearTimeout(refreshTimer);
   refreshTimer = null;
   appShell.hidden = true;
@@ -661,7 +724,7 @@ loginThemeToggle.addEventListener('click', () => {
 function showDashboard() {
   loginScreen.hidden = true;
   appShell.hidden = false;
-  loadPreferences().then(refreshPushStatus);
+  loadPreferences().then(() => { if (!appShell.hidden) refreshPushStatus(); });
 }
 
 const deviceLabels = {
