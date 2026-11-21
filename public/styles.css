@@ -35,6 +35,7 @@ button { font: inherit; }
 .setting-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 12px; }
 .setting-grid label, .setting-row { display: flex; align-items: center; gap: 9px; font-size: 13px; }
 .setting-row { justify-content: space-between; }
+.setting-row select { max-width: 100%; padding: 8px; border: 1px solid var(--line); border-radius: 9px; color: var(--ink); background: var(--card); font: inherit; }
 .settings-card input { accent-color: var(--green-dark); }
 .settings-button { margin: 16px 8px 0 0; padding: 10px 14px; border: 0; border-radius: 10px; color: white; background: var(--green-dark); cursor: pointer; font-weight: 600; }
 .settings-button:disabled { opacity: .6; cursor: not-allowed; }
@@ -71,7 +72,18 @@ body[data-theme="dark"] .login-card input[type="text"] { color: var(--ink); back
   width: min(100%, 430px); padding: 30px; border: 1px solid #eeece5; border-radius: 22px;
   background: var(--card); box-shadow: 0 16px 48px #373b2e0c;
 }
-.login-brand { margin-bottom: 38px; }
+.login-brand-row { display: flex; align-items: center; justify-content: space-between; gap: 12px; margin-bottom: 38px; }
+.theme-toggle { display: grid; width: 48px; height: 48px; flex: none; padding: 3px; place-items: center; border: 1px solid var(--line); border-radius: 14px; color: var(--green-dark); background: var(--mint); cursor: pointer; }
+.theme-toggle:focus-visible { outline: 3px solid #587d6488; }
+.theme-cat { width: 40px; height: 40px; transform-origin: 32px 32px; transition: transform .3s ease; }
+.theme-cat-face { fill: #b6beba; stroke: #53625a; stroke-width: 2; stroke-linejoin: round; }
+.theme-cat-detail { fill: none; stroke: #53625a; stroke-width: 2; stroke-linecap: round; }
+.theme-sun, .theme-moon { fill: #e3a456; stroke: #946121; stroke-width: 1.5; stroke-linecap: round; transform-origin: 32px 25px; transition: opacity .3s ease, transform .3s ease; }
+.theme-sun path { fill: none; }
+.theme-moon { opacity: 0; transform: scale(.5) rotate(-30deg); fill: #e8d897; stroke: #8d7b4f; }
+.theme-toggle[aria-pressed="true"] .theme-cat { transform: rotate(-8deg); }
+.theme-toggle[aria-pressed="true"] .theme-sun { opacity: 0; transform: scale(.5) rotate(30deg); }
+.theme-toggle[aria-pressed="true"] .theme-moon { opacity: 1; transform: scale(1) rotate(0); }
 .login-card h1 { font-size: 34px; }
 .login-card form { margin-top: 25px; }
 .login-card label { display: block; margin-bottom: 8px; font-size: 12px; font-weight: 600; }
@@ -89,13 +101,15 @@ body[data-theme="dark"] .login-card input[type="text"] { color: var(--ink); back
 .cat-detail { fill: none; stroke: #53625a; stroke-width: 2; stroke-linecap: round; }
 .cat-eye { fill: #34443b; }
 .cat-paw { fill: #cbd1cc; stroke: #53625a; stroke-width: 2; stroke-linejoin: round; transition: transform .3s ease; }
+.cat-paw-left { transform-origin: 17px 41px; }
+.cat-paw-right { transform-origin: 47px 41px; }
 .paw-lines { fill: none; stroke-linecap: round; stroke-width: 1.5; }
-.password-toggle[aria-pressed="true"] .cat-paw-left { transform: translate(-8px, 5px) rotate(-8deg); transform-origin: 17px 41px; }
-.password-toggle[aria-pressed="true"] .cat-paw-right { transform: translate(8px, 5px) rotate(8deg); transform-origin: 47px 41px; }
+.password-toggle[aria-pressed="true"] .cat-paw-left { transform: translate(-8px, 5px) rotate(-8deg); }
+.password-toggle[aria-pressed="true"] .cat-paw-right { transform: translate(8px, 5px) rotate(8deg); }
 .login-card .remember-option { display: flex; align-items: center; gap: 9px; margin: 14px 0 0; cursor: pointer; }
 .login-card input[type="checkbox"] { width: 17px; height: 17px; flex: none; margin: 0; accent-color: var(--green-dark); }
 .remember-option small { display: block; margin-top: 3px; color: var(--muted); font-weight: 400; }
-@media (prefers-reduced-motion: reduce) { .cat-paw { transition: none; } }
+@media (prefers-reduced-motion: reduce) { .cat-paw, .theme-cat, .theme-sun, .theme-moon { transition: none; } }
 .login-button {
   width: 100%; min-height: 46px; margin-top: 13px; border: 0; border-radius: 12px;
   color: #fff; background: var(--green-dark); font-weight: 600; cursor: pointer;
