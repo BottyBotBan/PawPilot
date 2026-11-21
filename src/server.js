@@ -284,6 +284,20 @@ function createServer({
             sendJson(response, 200, preferences.write(body));
             return;
           }
+          if (request.method === 'PATCH') {
+            if (!isSameOrigin(request)) {
+              sendJson(response, 403, { error: 'Ungueltige Herkunft der Anfrage.' });
+              return;
+            }
+            const body = await readJson(request);
+            if (!body || typeof body !== 'object' || Array.isArray(body) ||
+                Object.keys(body).length !== 1 || !['light', 'dark'].includes(body.theme)) {
+              sendJson(response, 400, { error: 'Ungueltige Einstellungen.' });
+              return;
+            }
+            sendJson(response, 200, preferences.write({ ...preferences.read(), theme: body.theme }));
+            return;
+          }
         }
 
         if (url.pathname === '/api/push' && request.method === 'GET') {
