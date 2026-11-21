@@ -33,10 +33,20 @@
     </svg>
     <main id="login-screen" class="login-shell">
       <section class="login-card">
-        <a class="brand login-brand" href="/" aria-label="Startseite">
-          <img class="brand-mark" src="/icon-192.png" alt="" width="43" height="43">
-          <span><strong>Katzenklo</strong><small>YJE030 · privater Zugang</small></span>
-        </a>
+        <div class="login-brand-row">
+          <a class="brand login-brand" href="/" aria-label="Startseite">
+            <img class="brand-mark" src="/icon-192.png" alt="" width="43" height="43">
+            <span><strong>Katzenklo</strong><small>YJE030 · privater Zugang</small></span>
+          </a>
+          <button id="login-theme" class="theme-toggle" type="button" aria-label="Dunkelmodus" aria-pressed="false" title="Dunkelmodus">
+            <svg class="theme-cat" viewBox="0 0 64 64" aria-hidden="true">
+              <path class="theme-cat-face" d="M12 28 13 10l13 8a27 27 0 0 1 12 0l13-8 1 18c3 5 4 10 3 15-2 11-12 16-23 16S11 54 9 43c-1-5 0-10 3-15Z"/>
+              <path class="theme-cat-detail" d="m16 15 6 5M48 15l-6 5M21 34h4m14 0h4m-14 6 3 2 3-2m-3 2v3m0 0c-2 2-4 2-5 1m5-1c2 2 4 2 5 1"/>
+              <g class="theme-sun"><circle cx="32" cy="25" r="3"/><path d="M32 19v-2m0 16v-2m-6-6h-2m16 0h-2m-10-4-1.5-1.5m11 11-1.5-1.5m-8 0-1.5 1.5m11-11-1.5 1.5"/></g>
+              <path class="theme-moon" d="M34 19a6 6 0 1 0 4 9 5 5 0 0 1-4-9Z"/>
+            </svg>
+          </button>
+        </div>
         <p class="eyebrow">WILLKOMMEN ZURÜCK</p>
         <h1>Anmelden</h1>
         <p class="subtitle">Melde dich mit deinem persönlichen Passwort an.</p>
@@ -98,6 +108,7 @@
         <summary><svg class="icon heading-icon" aria-hidden="true"><use href="#icon-settings"></use></svg> Einstellungen</summary>
         <form id="settings-form">
           <h3><svg class="icon heading-icon" aria-hidden="true"><use href="#icon-moon"></use></svg> Darstellung</h3>
+          <label class="setting-row"><span>Sprache</span><select id="setting-language"><option value="de">Deutsch</option><option value="en">English</option></select></label>
           <label class="setting-row"><span>Dark Mode</span><input id="setting-dark" type="checkbox"></label>
           <h3>Bereiche anzeigen</h3>
           <div class="setting-grid">
