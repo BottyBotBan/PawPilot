@@ -91,9 +91,18 @@
         <div class="top-actions">
           <span id="connection" class="connection"><i></i> Verbinde…</span>
           <button id="refresh" class="icon-button" type="button" aria-label="Daten aktualisieren" title="Aktualisieren"><svg class="icon" aria-hidden="true"><use href="#icon-refresh"></use></svg></button>
+          <button id="dashboard-theme" class="theme-toggle" type="button" aria-label="Dunkelmodus" aria-pressed="false" title="Dunkelmodus" disabled>
+            <svg class="theme-cat" viewBox="0 0 64 64" aria-hidden="true">
+              <path class="theme-cat-face" d="M12 28 13 10l13 8a27 27 0 0 1 12 0l13-8 1 18c3 5 4 10 3 15-2 11-12 16-23 16S11 54 9 43c-1-5 0-10 3-15Z"/>
+              <path class="theme-cat-detail" d="m16 15 6 5M48 15l-6 5M21 34h4m14 0h4m-14 6 3 2 3-2m-3 2v3m0 0c-2 2-4 2-5 1m5-1c2 2 4 2 5 1"/>
+              <g class="theme-sun"><circle cx="32" cy="25" r="3"/><path d="M32 19v-2m0 16v-2m-6-6h-2m16 0h-2m-10-4-1.5-1.5m11 11-1.5-1.5m-8 0-1.5 1.5m11-11-1.5 1.5"/></g>
+              <path class="theme-moon" d="M34 19a6 6 0 1 0 4 9 5 5 0 0 1-4-9Z"/>
+            </svg>
+          </button>
           <button id="logout" class="logout-button" type="button">Abmelden</button>
         </div>
       </header>
+      <p id="theme-message" class="theme-message" role="status" aria-live="polite"></p>
 
       <section class="intro">
         <div>
@@ -132,6 +141,7 @@
         <p id="push-message" class="activity-note" role="status"></p>
       </details>
 
+      <div class="dashboard-grid">
       <section class="cards" aria-label="Gerätestatus">
         <article class="card hero-card">
           <div class="card-heading">
@@ -179,6 +189,25 @@
         <p class="activity-note">Prozent aus den verbleibenden Tagen berechnet, kein gemessener Füllstand.</p>
       </section>
 
+      <div class="dashboard-columns">
+      <div class="dashboard-column">
+      <section id="warnings-card" class="card details-card" data-section="warnings" hidden>
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">LOKALE MELDUNGEN</p>
+            <h2><svg class="icon heading-icon" aria-hidden="true"><use href="#icon-warning"></use></svg>Warnungen</h2>
+          </div>
+          <span id="warning-count" class="count-pill">0 Meldungen</span>
+        </div>
+        <p id="warning-current" class="warning-current" role="status"></p>
+        <p id="warning-note" class="warning-note">Vergangene Meldungen können bereits behoben sein. Die Anzeige ersetzt keine Sicherheitsprüfung.</p>
+        <div id="warning-history" class="warning-history"></div>
+        <details id="warning-more" class="history-more warning-history" hidden>
+          <summary id="warning-more-label"></summary>
+          <div id="warning-older"></div>
+        </details>
+      </section>
+
       <section id="activity-card" class="card details-card" data-section="activity" hidden>
         <div class="section-title">
           <div>
@@ -219,6 +248,8 @@
         </details>
       </section>
 
+      </div>
+      <div class="dashboard-column">
       <section class="card details-card camera-card" data-section="camera">
         <div class="section-title">
           <div>
@@ -229,23 +260,6 @@
         <p class="camera-placeholder">Kamera noch nicht eingerichtet</p>
         <p class="activity-note">Platzhalter für die Raspberry-Pi-Kamera. Es wird noch kein Bild übertragen oder aufgezeichnet.</p>
         <button class="camera-button" type="button" disabled>Livebild öffnen</button>
-      </section>
-
-      <section id="warnings-card" class="card details-card" data-section="warnings" hidden>
-        <div class="section-title">
-          <div>
-            <p class="eyebrow">LOKALE MELDUNGEN</p>
-            <h2><svg class="icon heading-icon" aria-hidden="true"><use href="#icon-warning"></use></svg>Warnungen</h2>
-          </div>
-          <span id="warning-count" class="count-pill">0 Meldungen</span>
-        </div>
-        <p id="warning-current" class="warning-current" role="status"></p>
-        <p id="warning-note" class="warning-note">Vergangene Meldungen können bereits behoben sein. Die Anzeige ersetzt keine Sicherheitsprüfung.</p>
-        <div id="warning-history" class="warning-history"></div>
-        <details id="warning-more" class="history-more warning-history" hidden>
-          <summary id="warning-more-label"></summary>
-          <div id="warning-older"></div>
-        </details>
       </section>
 
       <section class="actions card" data-section="actions">
@@ -309,6 +323,9 @@
           <p class="empty-state">Die Tuya-Gerätefunktionen erscheinen nach der Verbindung.</p>
         </div>
       </section>
+      </div>
+      </div>
+      </div>
 
       <footer>
         <span>Privates Dashboard für deine YJE030</span>
