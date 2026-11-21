@@ -1,0 +1,14 @@
+{
+  "name": "yje030-dashboard",
+  "version": "1.0.0",
+  "private": true,
+  "license": "GPL-3.0-only",
+  "description": "Privates Raspberry-Pi-Dashboard fuer die Kuzmotec YJE030",
+  "engines": {
+    "node": ">=20"
+  },
+  "scripts": {
+    "start": "node src/server.js",
+    "test": "node --test"
+  }
+}
