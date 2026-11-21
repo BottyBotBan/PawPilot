@@ -97,7 +97,7 @@ Auf dem Smartphone kann die HTTPS-Seite ueber das Browser-Menue zum Startbildsch
 
 ## Einstellungen und Push auf dem iPhone
 
-Unter **Einstellungen** lassen sich Dark Mode und Dashboard-Bereiche ein- oder ausblenden. Die Auswahl wird auf dem Pi in `data/preferences.json` gespeichert und nach erneutem Oeffnen auch auf anderen Geraeten geladen. Ausgeblendete Bereiche bleiben in Betrieb; Warnungen werden dadurch nicht abgeschaltet.
+Unter **Einstellungen** lassen sich Deutsch oder Englisch, Dark Mode und die angezeigten Dashboard-Bereiche waehlen. Die Auswahl wird auf dem Pi in `data/preferences.json` gespeichert und nach erneutem Oeffnen auch auf anderen Geraeten geladen. Auf der Anmeldeseite kann die Sprache ebenfalls ausgewaehlt werden; nach der Anmeldung gilt die gespeicherte Server-Einstellung. Der Browser merkt sich die zuletzt verwendete Sprache fuer die Anmeldeseite, sofern lokaler Speicher verfuegbar ist. Technische Fehlermeldungen des Servers und Push-Hinweise koennen weiterhin auf Deutsch erscheinen. Ausgeblendete Bereiche bleiben in Betrieb; Warnungen werden dadurch nicht abgeschaltet.
 
 Fuer Push ist iOS 16.4 oder neuer, HTTPS und eine Internetverbindung erforderlich:
 
@@ -144,6 +144,9 @@ Der Wert muss der vom Tuya-Geraetemodell vorgegebenen JSON-Darstellung entsprech
 - DP 114, 119 und 122 wurden bei derselben YJE030 den Nicht-stoeren-Einstellungen fuer Anzeigelicht, Signalton und Reinigung zugeordnet. Sie zeigen die Einstellung, nicht zwingend einen aktuell aktiven Zeitplan; die Uhrzeiten sind nicht zugeordnet.
 - Laut Geraetevergleich gehoeren DP 117 und 136 zu den Luftvorhang-Einstellungen nach Toilettennutzung bzw. taegliche Reinigung. Die Aktivierungszeiten sind noch nicht zugeordnet.
 - DP 131 entsprach bei zwei Berichten der Besuchsdauer in Sekunden und wird lokal als letzte Besuchsdauer dargestellt.
+- DP 115 ist laut Geraetedefinition eine taegliche Luft-/Reinigungseinstellung; die praktische Bedeutung und Skalierung sind noch zu pruefen.
+- DP 132 wurde pro Besuch mit dem Wert 1 gemeldet und ist nicht als Gesamtzaehler bestaetigt. DP 133 ist laut Geraetedefinition ein Luefterstatus; die praktische Zuordnung bleibt zu pruefen.
+- DP 134 enthaelt Diagnose-Rohdaten. Eine Interpretation als Motorposition ist nicht bestaetigt; die Werte sind kein Positions- oder Sicherheitsnachweis.
 - DP 110 wird als letzte Geraetemeldung dargestellt. Einzelne Meldungen koennen veraltet sein und duerfen nicht als Sicherheitspruefung oder als Nachweis fuer die Abwesenheit einer Katze verwendet werden.
 - DP 128 wurde bei der getesteten YJE030 durch Ein- und Ausschalten dem Timer-Modus bzw. der regelmaessigen Reinigung zugeordnet; auch diese Anzeige ist rein lesend.
 - DP 4 (`auto_clean`) wurde bei der getesteten YJE030 durch Ein- und Ausschalten Auto Clean bzw. dem Sensormodus zugeordnet; auch diese Anzeige ist rein lesend.
