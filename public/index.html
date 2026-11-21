@@ -1,0 +1,308 @@
+<!doctype html>
+<html lang="de">
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="theme-color" content="#f5f2eb">
+    <title>Katzenklo - Zuhause</title>
+    <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png">
+    <link rel="apple-touch-icon" sizes="180x180" href="/icon-180.png">
+    <link rel="manifest" href="/manifest.webmanifest">
+    <link rel="stylesheet" href="/styles.css">
+    <script src="/app.js" defer></script>
+  </head>
+  <body>
+    <svg class="icon-defs" xmlns="http://www.w3.org/2000/svg" aria-hidden="true" focusable="false">
+      <symbol id="icon-refresh" viewBox="0 0 24 24"><path d="M20 7v5h-5M4 17v-5h5"/><path d="M5 9a7.5 7.5 0 0 1 13-2l2 5M4 12l2 5a7.5 7.5 0 0 0 13-2"/></symbol>
+      <symbol id="icon-wifi" viewBox="0 0 24 24"><path d="M3 9a14 14 0 0 1 18 0M6 12a9 9 0 0 1 12 0M9 15a4.5 4.5 0 0 1 6 0"/><circle cx="12" cy="18" r="1"/></symbol>
+      <symbol id="icon-scale" viewBox="0 0 24 24"><rect x="4" y="4" width="16" height="16" rx="4"/><path d="M8 11a4 4 0 0 1 8 0M12 11l2-2"/></symbol>
+      <symbol id="icon-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="8"/><path d="M12 7v5l3 2"/></symbol>
+      <symbol id="icon-leaf" viewBox="0 0 24 24"><path d="M19 4C9 4 5 8 5 14a5 5 0 0 0 5 5c6 0 10-5 9-15ZM5 20c2-4 5-7 10-10"/></symbol>
+      <symbol id="icon-litter" viewBox="0 0 24 24"><path d="M7 4h10l2 15H5L7 4ZM7 8h10M9 15h.1M12 13h.1M15 16h.1"/></symbol>
+      <symbol id="icon-box" viewBox="0 0 24 24"><path d="M4 8h16l-1 11H5L4 8ZM3 5h18v3H3zM10 12h4"/></symbol>
+      <symbol id="icon-paw" viewBox="0 0 24 24"><ellipse cx="7" cy="8" rx="1.5" ry="2"/><ellipse cx="12" cy="6.5" rx="1.5" ry="2"/><ellipse cx="17" cy="8" rx="1.5" ry="2"/><path d="M8 14c1-1 2-2 4-2s3 1 4 2c2 2 2 5-1 5-1 0-2-1-3-1s-2 1-3 1c-3 0-3-3-1-5Z"/></symbol>
+      <symbol id="icon-camera" viewBox="0 0 24 24"><rect x="3" y="7" width="18" height="12" rx="3"/><path d="M7 7l1-2h4l1 2"/><circle cx="12" cy="13" r="3"/></symbol>
+      <symbol id="icon-warning" viewBox="0 0 24 24"><path d="M12 3 2.5 20h19L12 3ZM12 9v5M12 17h.1"/></symbol>
+      <symbol id="icon-controls" viewBox="0 0 24 24"><path d="M4 7h16M4 17h16"/><circle cx="9" cy="7" r="2"/><circle cx="16" cy="17" r="2"/></symbol>
+      <symbol id="icon-list" viewBox="0 0 24 24"><path d="M9 6h11M9 12h11M9 18h11M4 6h1M4 12h1M4 18h1"/></symbol>
+      <symbol id="icon-device" viewBox="0 0 24 24"><rect x="4" y="3" width="16" height="18" rx="4"/><circle cx="12" cy="11" r="4"/><path d="M9 18h6"/></symbol>
+      <symbol id="icon-settings" viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M12 3v2M12 19v2M3 12h2M19 12h2M5.6 5.6 7 7M17 17l1.4 1.4M18.4 5.6 17 7M7 17l-1.4 1.4"/><circle cx="12" cy="12" r="7"/></symbol>
+      <symbol id="icon-moon" viewBox="0 0 24 24"><path d="M19 15A8 8 0 0 1 9 5a8 8 0 1 0 10 10Z"/></symbol>
+      <symbol id="icon-bell" viewBox="0 0 24 24"><path d="M6 17h12l-1.5-2V10a4.5 4.5 0 0 0-9 0v5L6 17ZM10 20h4"/></symbol>
+      <symbol id="icon-chart" viewBox="0 0 24 24"><path d="M4 4v16h16M7 16l4-5 3 2 5-6"/><circle cx="19" cy="7" r="1"/></symbol>
+    </svg>
+    <main id="login-screen" class="login-shell">
+      <section class="login-card">
+        <a class="brand login-brand" href="/" aria-label="Startseite">
+          <img class="brand-mark" src="/icon-192.png" alt="" width="43" height="43">
+          <span><strong>Katzenklo</strong><small>YJE030 · privater Zugang</small></span>
+        </a>
+        <p class="eyebrow">WILLKOMMEN ZURÜCK</p>
+        <h1>Anmelden</h1>
+        <p class="subtitle">Melde dich mit deinem persönlichen Passwort an.</p>
+        <form id="login-form">
+          <label for="login-password">Passwort</label>
+          <div class="password-field">
+            <input id="login-password" name="password" type="password" autocomplete="current-password" minlength="14" maxlength="256" required>
+            <button id="password-toggle" class="password-toggle" type="button" aria-label="Passwort anzeigen" aria-pressed="false" aria-controls="login-password" title="Passwort anzeigen">
+              <svg class="password-cat" viewBox="0 0 64 64" aria-hidden="true">
+                <path class="cat-face" d="M12 27 13 10l13 8a27 27 0 0 1 12 0l13-8 1 17c3 5 4 10 3 15-2 12-12 17-23 17S11 54 9 42c-1-5 0-10 3-15Z"/>
+                <path class="cat-detail" d="m16 15 6 5M48 15l-6 5M26 20l2 5m8-5-2 5M29 39l3 2 3-2m-3 2v3m0 0c-2 2-4 2-5 1m5-1c2 2 4 2 5 1"/>
+                <ellipse class="cat-eye" cx="23" cy="33" rx="2.5" ry="3.5"/>
+                <ellipse class="cat-eye" cx="41" cy="33" rx="2.5" ry="3.5"/>
+                <g class="cat-paw cat-paw-left">
+                  <path d="M13 44c-3-3-3-8-1-11 0-3 1-5 3-5 1-3 4-3 5-1 2-2 5-1 5 2 3-1 5 2 4 5l-1 9c-1 6-10 7-15 1Z"/>
+                  <path class="paw-lines" d="m15 31 1 5m4-7 1 6m4-4v5"/>
+                </g>
+                <g class="cat-paw cat-paw-right">
+                  <path d="M51 44c3-3 3-8 1-11 0-3-1-5-3-5-1-3-4-3-5-1-2-2-5-1-5 2-3-1-5 2-4 5l1 9c1 6 10 7 15 1Z"/>
+                  <path class="paw-lines" d="m49 31-1 5m-4-7-1 6m-4-4v5"/>
+                </g>
+              </svg>
+            </button>
+          </div>
+          <label class="remember-option" for="login-remember">
+            <input id="login-remember" name="remember" type="checkbox">
+            <span>Angemeldet bleiben <small>30 Tage auf diesem Gerät</small></span>
+          </label>
+          <button id="login-submit" class="login-button" type="submit">Sicher anmelden</button>
+          <p id="login-message" class="login-message" role="status" aria-live="polite"></p>
+        </form>
+        <p class="login-hint">Der Zugriff ist zusätzlich durch dein privates Tailscale-Netz geschützt.</p>
+      </section>
+    </main>
+
+    <main id="app-shell" class="shell" hidden>
+      <header class="topbar">
+        <a class="brand" href="/" aria-label="Startseite">
+          <img class="brand-mark" src="/icon-192.png" alt="" width="43" height="43">
+          <span><strong>Katzenklo</strong><small>YJE030 · Zuhause</small></span>
+        </a>
+        <div class="top-actions">
+          <span id="connection" class="connection"><i></i> Verbinde…</span>
+          <button id="refresh" class="icon-button" type="button" aria-label="Daten aktualisieren" title="Aktualisieren"><svg class="icon" aria-hidden="true"><use href="#icon-refresh"></use></svg></button>
+          <button id="logout" class="logout-button" type="button">Abmelden</button>
+        </div>
+      </header>
+
+      <section class="intro">
+        <div>
+          <p class="eyebrow">GERÄTESTATUS</p>
+          <h1>Alles im Blick.</h1>
+          <p class="subtitle">Der aktuelle Überblick für dein Katzenklo.</p>
+        </div>
+        <div class="updated">Zuletzt aktualisiert <strong id="updated">–</strong></div>
+      </section>
+
+      <details class="card settings-card">
+        <summary><svg class="icon heading-icon" aria-hidden="true"><use href="#icon-settings"></use></svg> Einstellungen</summary>
+        <form id="settings-form">
+          <h3><svg class="icon heading-icon" aria-hidden="true"><use href="#icon-moon"></use></svg> Darstellung</h3>
+          <label class="setting-row"><span>Dark Mode</span><input id="setting-dark" type="checkbox"></label>
+          <h3>Bereiche anzeigen</h3>
+          <div class="setting-grid">
+            <label><input id="setting-weight" type="checkbox"> Letztes Gewicht</label>
+            <label><input id="setting-supplies" type="checkbox"> Erinnerungszähler</label>
+            <label><input id="setting-activity" type="checkbox"> Besuche &amp; Gewichtsverlauf</label>
+            <label><input id="setting-camera" type="checkbox"> Webcam</label>
+            <label><input id="setting-warnings" type="checkbox"> Warnungen</label>
+            <label><input id="setting-actions" type="checkbox"> Aktionen</label>
+            <label><input id="setting-values" type="checkbox"> Gerätewerte</label>
+            <label><input id="setting-functions" type="checkbox"> Verfügbare Befehle</label>
+          </div>
+          <button id="settings-save" class="settings-button" type="submit" disabled>Einstellungen speichern</button>
+          <p id="settings-message" class="activity-note" role="status"></p>
+        </form>
+        <h3><svg class="icon heading-icon" aria-hidden="true"><use href="#icon-bell"></use></svg> Push-Benachrichtigungen</h3>
+        <p class="activity-note">Gerätemeldungen und Abfallbehälter-Erinnerung bei 0 Tagen. Kein gemessener Füllstand. Auf dem iPhone die Seite zuerst mit Safari zum Home-Bildschirm hinzufügen und dort öffnen.</p>
+        <button id="push-enable" class="settings-button" type="button" disabled>Auf diesem Gerät aktivieren</button>
+        <button id="push-test" class="settings-button secondary-button" type="button">Testnachricht senden</button>
+        <button id="push-disable" class="settings-button secondary-button" type="button">Auf diesem Gerät deaktivieren</button>
+        <p id="push-message" class="activity-note" role="status"></p>
+      </details>
+
+      <section class="cards" aria-label="Gerätestatus">
+        <article class="card hero-card">
+          <div class="card-heading">
+            <span class="icon-bubble" aria-hidden="true"><svg class="icon"><use href="#icon-wifi"></use></svg></span>
+            <span class="card-label">Verbindung</span>
+          </div>
+          <strong id="device-state" class="hero-value">Wird geprüft</strong>
+          <span id="device-subtitle" class="card-note">Verbindung zum Gerät wird geprüft</span>
+          <div class="status-track"><span id="status-track"></span></div>
+        </article>
+        <article class="card weight-card" data-section="weight">
+          <div class="card-heading">
+            <span class="icon-bubble weight-icon" aria-hidden="true"><svg class="icon"><use href="#icon-scale"></use></svg></span>
+            <span class="card-label">Letztes Gewicht</span>
+          </div>
+          <strong id="weight" class="weight-value">–</strong>
+          <span id="weight-note" class="card-note">Warte auf Gerätestatus</span>
+        </article>
+      </section>
+
+      <section id="supplies-card" class="card details-card" data-section="supplies" hidden>
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">ERINNERUNGSZÄHLER</p>
+            <h2><svg class="icon heading-icon" aria-hidden="true"><use href="#icon-clock"></use></svg>Verbleibende Zeit</h2>
+          </div>
+        </div>
+        <div class="supply-grid">
+          <div class="supply-item">
+            <div class="supply-heading"><strong class="supply-name"><svg class="icon" aria-hidden="true"><use href="#icon-leaf"></use></svg>Deodorant</strong><strong id="deodorant-percent">–</strong></div>
+            <progress id="deodorant-progress" max="100" value="0" aria-label="Verbleibende Deodorant-Zeit" hidden></progress>
+            <span id="deodorant-remaining">Nicht verfügbar</span>
+          </div>
+          <div class="supply-item">
+            <div class="supply-heading"><strong class="supply-name"><svg class="icon" aria-hidden="true"><use href="#icon-litter"></use></svg>Katzenstreu</strong><strong id="litter-percent">–</strong></div>
+            <progress id="litter-progress" max="100" value="0" aria-label="Verbleibende Katzenstreu-Zeit" hidden></progress>
+            <span id="litter-remaining">Nicht verfügbar</span>
+          </div>
+          <div class="supply-item">
+            <div class="supply-heading"><strong class="supply-name"><svg class="icon" aria-hidden="true"><use href="#icon-box"></use></svg>Abfallbehälter</strong><strong id="box-percent">–</strong></div>
+            <progress id="box-progress" max="100" value="0" aria-label="Verbleibende Abfallbehälter-Zeit" hidden></progress>
+            <span id="box-remaining">Nicht verfügbar</span>
+          </div>
+        </div>
+        <p class="activity-note">Prozent aus den verbleibenden Tagen berechnet, kein gemessener Füllstand.</p>
+      </section>
+
+      <section id="activity-card" class="card details-card" data-section="activity" hidden>
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">LOKALE AUFZEICHNUNG</p>
+            <h2><svg class="icon heading-icon" aria-hidden="true"><use href="#icon-paw"></use></svg>Besuche</h2>
+          </div>
+        </div>
+        <div class="activity-totals">
+          <div><span>Heute: Toilettenbesuche</span><strong id="today-visits">–</strong></div>
+          <div><span>Heute: Aufenthaltsdauer</span><strong id="today-stay">–</strong></div>
+        </div>
+        <p id="activity-note" class="activity-note"></p>
+        <h3>Letzte 7 Tage</h3>
+        <div id="week-chart" class="week-chart" aria-label="Besuche der letzten sieben Tage"></div>
+        <h3 id="day-heading">Tagesansicht</h3>
+        <label class="day-select-label" for="day-select">Tag auswählen</label>
+        <select id="day-select" class="day-select"></select>
+        <div id="day-chart" class="day-chart" aria-label="Besuche nach Stunde"></div>
+        <div id="day-axis" class="day-axis" aria-hidden="true"><span>00</span><span>06</span><span>12</span><span>18</span><span>23</span></div>
+        <p class="activity-note">Uhrzeit des Raspberry Pi · Besuchsmeldungen, keine Live-Überwachung</p>
+        <h3>Einzelne Besuche</h3>
+        <p class="activity-note">Zeitpunkt der empfangenen Meldung · Gewicht ist eine Gerätemessung und kann ungenau sein.</p>
+        <div id="day-visits"></div>
+        <details id="day-more" class="history-more" hidden>
+          <summary id="day-more-label"></summary>
+          <div id="day-older"></div>
+        </details>
+        <p id="day-visits-note" class="activity-note"></p>
+        <h3><svg class="icon heading-icon" aria-hidden="true"><use href="#icon-chart"></use></svg> Gewichtsverlauf</h3>
+        <p class="activity-note">Letzter gültiger Messwert pro Tag, maximal 30 Tage. Gerätemessung, kann ungenau sein; fehlende Besuche werden nicht ergänzt.</p>
+        <div id="weight-chart" class="weight-chart" aria-label="Gewichtsverlauf"></div>
+        <h3>Aktivitätsverlauf</h3>
+        <p class="activity-note">Ausgewählte lokal gemeldete Ereignisse; nicht der vollständige Smart-Life-Verlauf.</p>
+        <div id="activity-events" class="activity-events"></div>
+        <details id="activity-more" class="history-more" hidden>
+          <summary id="activity-more-label"></summary>
+          <div id="activity-older"></div>
+        </details>
+      </section>
+
+      <section class="card details-card camera-card" data-section="camera">
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">KAMERA</p>
+            <h2><svg class="icon heading-icon" aria-hidden="true"><use href="#icon-camera"></use></svg>Webcam</h2>
+          </div>
+        </div>
+        <p class="camera-placeholder">Kamera noch nicht eingerichtet</p>
+        <p class="activity-note">Platzhalter für die Raspberry-Pi-Kamera. Es wird noch kein Bild übertragen oder aufgezeichnet.</p>
+        <button class="camera-button" type="button" disabled>Livebild öffnen</button>
+      </section>
+
+      <section id="warnings-card" class="card details-card" data-section="warnings" hidden>
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">LOKALE MELDUNGEN</p>
+            <h2><svg class="icon heading-icon" aria-hidden="true"><use href="#icon-warning"></use></svg>Warnungen</h2>
+          </div>
+          <span id="warning-count" class="count-pill">0 Meldungen</span>
+        </div>
+        <p id="warning-current" class="warning-current" role="status"></p>
+        <p id="warning-note" class="warning-note">Vergangene Meldungen können bereits behoben sein. Die Anzeige ersetzt keine Sicherheitsprüfung.</p>
+        <div id="warning-history" class="warning-history"></div>
+        <details id="warning-more" class="history-more warning-history" hidden>
+          <summary id="warning-more-label"></summary>
+          <div id="warning-older"></div>
+        </details>
+      </section>
+
+      <section class="actions card" data-section="actions">
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">STEUERUNG</p>
+            <h2><svg class="icon heading-icon" aria-hidden="true"><use href="#icon-controls"></use></svg>Aktionen</h2>
+          </div>
+          <span class="safe-label">Sicherheitsabfrage aktiv</span>
+        </div>
+        <button id="clean" class="clean-button" type="button" disabled>
+          <span class="clean-icon" aria-hidden="true"><svg class="icon"><use href="#icon-refresh"></use></svg></span>
+          <span><strong>Manuell reinigen</strong><small id="clean-note">Befehl wird erst nach Prüfung eingerichtet</small></span>
+          <span class="button-arrow" aria-hidden="true">→</span>
+        </button>
+        <p id="message" class="message" role="status" aria-live="polite"></p>
+        <div id="counter-actions" class="counter-actions" hidden>
+          <p class="counter-note">Erinnerungszähler ändern; ersetzt nicht den Austausch von Deodorant oder Streu und nicht das Leeren des Behälters.</p>
+          <div class="counter-form">
+            <span>Deodorant-Zähler</span>
+            <button id="deodorant-reset" class="counter-reset" type="button" disabled>Zurücksetzen</button>
+            <p id="deodorant-message" class="message" role="status" aria-live="polite"></p>
+          </div>
+          <form id="litter-form" class="counter-form">
+            <label for="litter-days">Katzenstreu-Tage (0–30)</label>
+            <input id="litter-days" type="number" min="0" max="30" step="1" required>
+            <button id="litter-save" type="submit" disabled>Speichern</button>
+            <p id="litter-message" class="message" role="status" aria-live="polite"></p>
+          </form>
+          <form id="box-form" class="counter-form">
+            <label for="box-days">Abfallbehälter-Tage (0–14)</label>
+            <input id="box-days" type="number" min="0" max="14" step="1" required>
+            <button id="box-save" type="submit" disabled>Speichern</button>
+            <p id="box-message" class="message" role="status" aria-live="polite"></p>
+          </form>
+        </div>
+      </section>
+
+      <section class="card details-card" data-section="values">
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">LIVE-DATEN</p>
+            <h2><svg class="icon heading-icon" aria-hidden="true"><use href="#icon-device"></use></svg>Gerätewerte</h2>
+          </div>
+          <span id="value-count" class="count-pill">0 Werte</span>
+        </div>
+        <div id="values" class="values">
+          <p class="empty-state">Nach der Einrichtung erscheinen hier die von der YJE030 gemeldeten Werte.</p>
+        </div>
+      </section>
+
+      <section class="card details-card" data-section="functions">
+        <div class="section-title">
+          <div>
+            <p class="eyebrow">GERÄTEMODELL</p>
+            <h2><svg class="icon heading-icon" aria-hidden="true"><use href="#icon-list"></use></svg>Verfügbare Befehle</h2>
+          </div>
+          <span id="function-count" class="count-pill">0 Befehle</span>
+        </div>
+        <div id="functions" class="values">
+          <p class="empty-state">Die Tuya-Gerätefunktionen erscheinen nach der Verbindung.</p>
+        </div>
+      </section>
+
+      <footer>
+        <span>Privates Dashboard für deine YJE030</span>
+        <span>Privater Zugriff · keine öffentlichen Router-Ports</span>
+      </footer>
+    </main>
+  </body>
+</html>
