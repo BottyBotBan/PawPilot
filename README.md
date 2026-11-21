@@ -27,9 +27,17 @@ Der lokale Modus liest das Gerät direkt im Heimnetz. Für Fernzugriff kann Tail
 | --- | --- |
 | Raspberry Pi 4 | Bisherige Projektplattform mit Raspberry Pi OS. |
 | Raspberry Pi Zero 2 W | Möglicher Kandidat mit einem passenden Linux-System, aber bislang nicht getestet; Leistung und Einrichtung müssen noch geprüft werden. |
-| Raspberry Pi Pico WH | Mikrocontroller, kein Linux-Rechner: Die aktuelle Node.js-/Python-Anwendung läuft darauf nicht unverändert. |
+| Raspberry Pi Pico WH | Mikrocontroller mit WLAN, kein Linux-Rechner: Die aktuelle Node.js-/Python-Anwendung läuft darauf nicht unverändert. Ein Einsatz als separates Kameramodul ist eine ungetestete Projektidee. |
 
 Die Zuordnung der Datenpunkte wurde an einer YJE030 untersucht. Andere Modelle und Firmware-Versionen sind nicht bestätigt. Unbekannte Datenpunkte nicht beschreiben.
+
+### Geplant: Infrarotkamera und Halterung
+
+Eine Idee für die Zukunft ist eine separate Infrarotkamera mit einem Raspberry Pi Pico WH, die Bilder per WLAN an PawPilot übermittelt. Dafür soll auch eine eigene 3D-gedruckte Halterung entstehen, die an der Katzentoilette angebracht werden kann.
+
+Das ist bisher **nicht implementiert oder getestet**. Ein passendes Kameramodul, seine Verbindung zum Pico, eine eigene Firmware sowie Bildübertragung, Leistung und Stromversorgung müssen erst untersucht werden. Für Aufnahmen bei Dunkelheit könnte zusätzlich eine geeignete Infrarotbeleuchtung nötig sein. Ein Pico WH ersetzt dabei nicht den Raspberry Pi, auf dem PawPilot läuft.
+
+Die Halterung darf die Katze nicht gefährden und keine Bewegung oder Sicherheitseinrichtung der Toilette behindern. Vor einer Umsetzung müssen außerdem privater Zugriff, Übertragung und mögliche Speicherung der Bilder geklärt werden. Die Webcam-Kachel ist derzeit nur ein Platzhalter und überträgt oder speichert keine Bilder.
 
 ## Zugangsdaten und Datenschutz
 
